@@ -85,8 +85,8 @@ model2 <- xgb.train(params = list(nthread = 4, # More threads if you feel so
 # Try with Multi-Grained Scanning for gcForest ------
 library(plyr)
 create_progress_bar(name = "win") # Get rid of progress bar if you don't like, or set to text
-new_train <- plyr::alply(train, 1, function(x) {matrix(x, nrow = 28, ncol = 28)}, .progress = "win")
-new_test <- plyr::alply(test, 1, function(x) {matrix(x, nrow = 28, ncol = 28)}, .progress = "win")
+new_train <- plyr::alply(train, 1, function(x) {matrix(as.numeric(x), nrow = 28, ncol = 28)}, .progress = "win")
+new_test <- plyr::alply(test, 1, function(x) {matrix(as.numeric(x), nrow = 28, ncol = 28)}, .progress = "win")
 
 # Run Multi-Grained Scanning ------
 new_model <- MGScanning(data = new_train,
